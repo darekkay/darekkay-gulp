@@ -42,9 +42,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --pure-lockfile --prefer-offline
 
-      - name: Test
-        run: yarn test
+      - name: Lint
+        run: yarn lint
         if: ${{ success() || failure() }}
-
-      - name: Build
-        run: yarn build
