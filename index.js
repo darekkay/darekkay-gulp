@@ -1,13 +1,13 @@
 const gulp = require("gulp");
 
 const tasks = (config) => ({
-  assets: require("./tasks/assets")(config),
+  assets: config.paths.assets && require("./tasks/assets")(config),
   clean: require("./tasks/clean")(config),
-  content: require("./tasks/content")(config),
+  content: config.paths.content && require("./tasks/content")(config),
   env: require("./tasks/env")(config),
-  purge: require("./tasks/purge")(config),
-  scripts: require("./tasks/scripts")(config),
-  styles: require("./tasks/styles")(config),
+  purge: config.paths.purge && require("./tasks/purge")(config),
+  scripts: config.paths.scripts && require("./tasks/scripts")(config),
+  styles: config.paths.styles && require("./tasks/styles")(config),
 });
 
 // re-export gulp
