@@ -46,6 +46,7 @@
     "gulp"
   ],
   "license": "MIT",
+  "main": "index.js",
   "private": false,
   "repository": {
     "type": "git",
