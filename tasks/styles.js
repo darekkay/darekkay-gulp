@@ -5,7 +5,6 @@ const postcss = require("gulp-postcss");
 const plumber = require("gulp-plumber");
 const concat = require("gulp-concat");
 const minify = require("gulp-clean-css");
-const purgecss = require("@fullhuman/postcss-purgecss");
 
 const defaultPostcssPlugins = ["autoprefixer"];
 
@@ -21,10 +20,9 @@ const defaultPostcssPlugins = ["autoprefixer"];
  * - Minify
  */
 module.exports = ({ paths, postcssPlugins }) => {
-  const styleFiles = paths.styles.source + "/**/{*.css,*.sass,*.scss}";
   const stylesTask = () => {
     return gulp
-      .src([styleFiles], {
+      .src([paths.styles.source], {
         since: gulp.lastRun(stylesTask),
       })
       .pipe(concat("styles.css"))
@@ -42,7 +40,8 @@ module.exports = ({ paths, postcssPlugins }) => {
       .pipe(gulp.dest(paths.styles.destination));
   };
   stylesTask.displayName = "styles";
-  stylesTask.watcher = () => gulp.watch(styleFiles, stylesTask);
+  stylesTask.watcher = () =>
+    gulp.watch(paths.styles.watch || paths.styles.source, stylesTask);
 
   return stylesTask;
 };
