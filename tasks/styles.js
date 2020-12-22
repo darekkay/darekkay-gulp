@@ -23,12 +23,12 @@ module.exports = ({ paths, postcssPlugins }) => {
   const stylesTask = () => {
     const styles = Array.isArray(paths.styles) ? paths.styles : [paths.styles];
     return Promise.allSettled(
-      styles.map(({ source, destination }) =>
+      styles.map(({ source, destination, fileName }) =>
         gulp
           .src([source], {
             since: gulp.lastRun(stylesTask),
           })
-          .pipe(concat("styles.css"))
+          .pipe(concat(fileName || "styles.css"))
           .pipe(plumber())
           .pipe(dependents())
           .pipe(sass())
@@ -49,8 +49,7 @@ module.exports = ({ paths, postcssPlugins }) => {
   const watchGlob = Array.isArray(paths.styles)
     ? paths.styles.map((path) => path.watch || path.source)
     : paths.styles.watch || paths.styles.source;
-  stylesTask.watcher = () =>
-    gulp.watch(watchGlob, stylesTask);
+  stylesTask.watcher = () => gulp.watch(watchGlob, stylesTask);
 
   return stylesTask;
 };
