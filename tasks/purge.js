@@ -5,7 +5,7 @@ const concat = require("gulp-concat");
 const minify = require("gulp-clean-css");
 const purgecss = require("@fullhuman/postcss-purgecss");
 
-/* Purge unused CSS */
+/** Purge unused CSS */
 module.exports = ({ paths }) => {
   const purgeTask = () => {
     return gulp

@@ -1,4 +1,4 @@
-/* Set the node environment */
+/** Set the node environment */
 module.exports = ({}) => (environment) => {
   const task = () => {
     process.env.NODE_ENV = environment;

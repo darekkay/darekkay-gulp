@@ -8,7 +8,7 @@ const minify = require("gulp-clean-css");
 
 const defaultPostcssPlugins = ["autoprefixer"];
 
-/*
+/**
  * Process all styles:
  *
  * - Concat all style files

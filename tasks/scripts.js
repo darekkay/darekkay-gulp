@@ -5,7 +5,7 @@ const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const minify = require("gulp-minify");
 
-/*
+/**
  * Process all scripts:
  *
  * - Concat all script files
