@@ -21,27 +21,36 @@ const defaultPostcssPlugins = ["autoprefixer"];
  */
 module.exports = ({ paths, postcssPlugins }) => {
   const stylesTask = () => {
-    return gulp
-      .src([paths.styles.source], {
-        since: gulp.lastRun(stylesTask),
-      })
-      .pipe(concat("styles.css"))
-      .pipe(plumber())
-      .pipe(dependents())
-      .pipe(sass())
-      .pipe(
-        postcss(
-          (postcssPlugins || defaultPostcssPlugins).map((plugin) =>
-            require(plugin)
+    const styles = Array.isArray(paths.styles) ? paths.styles : [paths.styles];
+    return Promise.allSettled(
+      styles.map(({ source, destination }) =>
+        gulp
+          .src([source], {
+            since: gulp.lastRun(stylesTask),
+          })
+          .pipe(concat("styles.css"))
+          .pipe(plumber())
+          .pipe(dependents())
+          .pipe(sass())
+          .pipe(
+            postcss(
+              (postcssPlugins || defaultPostcssPlugins).map((plugin) =>
+                require(plugin)
+              )
+            )
           )
-        )
+          .pipe(minify())
+          .pipe(gulp.dest(destination))
       )
-      .pipe(minify())
-      .pipe(gulp.dest(paths.styles.destination));
+    );
   };
   stylesTask.displayName = "styles";
+
+  const watchGlob = Array.isArray(paths.styles)
+    ? paths.styles.map((path) => path.watch || path.source)
+    : paths.styles.watch || paths.styles.source;
   stylesTask.watcher = () =>
-    gulp.watch(paths.styles.watch || paths.styles.source, stylesTask);
+    gulp.watch(watchGlob, stylesTask);
 
   return stylesTask;
 };

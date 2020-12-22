@@ -8,7 +8,7 @@ const copy = ({ source, destination }) => {
 module.exports = ({ paths }) => {
   const assetsTask = () => {
     const assets = Array.isArray(paths.assets) ? paths.assets : [paths.assets];
-    return Promise.all(
+    return Promise.allSettled(
       assets.map((path) =>
         copy({ source: path.source, destination: path.destination })
       )
