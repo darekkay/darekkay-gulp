@@ -1,4 +1,5 @@
 const gulp = require("gulp");
+const gulpif = require("gulp-if");
 const dependents = require("gulp-dependents");
 const plumber = require("gulp-plumber");
 const concat = require("gulp-concat");
@@ -12,7 +13,7 @@ const minify = require("gulp-minify");
  * - Run Babel
  * - Minify
  */
-module.exports = ({ paths }) => {
+module.exports = ({ paths, useBabel = false }) => {
   const scriptFiles = paths.scripts.source + "/**/*.js";
   const scriptsTask = () => {
     return gulp
@@ -23,9 +24,12 @@ module.exports = ({ paths }) => {
       .pipe(plumber())
       .pipe(dependents())
       .pipe(
-        babel({
-          presets: ["@babel/env"],
-        })
+        gulpif(
+          useBabel,
+          babel({
+            presets: ["@babel/env"],
+          })
+        )
       )
       .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
       .pipe(gulp.dest(paths.scripts.destination));
