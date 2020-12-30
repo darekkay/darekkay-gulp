@@ -6,7 +6,7 @@ const minify = require("gulp-clean-css");
 const purgecss = require("@fullhuman/postcss-purgecss");
 
 /** Purge unused CSS */
-module.exports = ({ paths }) => {
+module.exports = ({ paths, purgeCssOptions = {} }) => {
   const purgeTask = () => {
     return gulp
       .src(paths.purge.css)
@@ -27,6 +27,8 @@ module.exports = ({ paths }) => {
 
               return broadMatches.concat(innerMatches);
             },
+
+            ...purgeCssOptions,
           }),
         ])
       )
