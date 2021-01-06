@@ -8,6 +8,7 @@ const tasks = (config) => ({
   purge: config.paths.purge && require("./tasks/purge")(config),
   scripts: config.paths.scripts && require("./tasks/scripts")(config),
   styles: config.paths.styles && require("./tasks/styles")(config),
+  icons: config.paths.icons && require("./tasks/icons")(config),
 });
 
 // re-export gulp
