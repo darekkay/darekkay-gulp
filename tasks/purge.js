@@ -1,7 +1,7 @@
+/* eslint-disable unicorn/better-regex */
 const gulp = require("gulp");
 const postcss = require("gulp-postcss");
 const plumber = require("gulp-plumber");
-const concat = require("gulp-concat");
 const minify = require("gulp-clean-css");
 const purgecss = require("@fullhuman/postcss-purgecss");
 

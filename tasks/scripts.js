@@ -14,7 +14,7 @@ const minify = require("gulp-minify");
  * - Minify
  */
 module.exports = ({ paths, useBabel = false }) => {
-  const scriptFiles = paths.scripts.source + "/**/*.js";
+  const scriptFiles = `${paths.scripts.source}/**/*.js`;
   const scriptsTask = () => {
     return gulp
       .src([scriptFiles], {
