@@ -1,7 +1,7 @@
 const { src, dest } = require("gulp");
 
 const copy = ({ source, destination }) => {
-  return src(`${source}/**/*`).pipe(dest(destination));
+  return src(source).pipe(dest(destination));
 };
 
 /** Passthrough assets */
