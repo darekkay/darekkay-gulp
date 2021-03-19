@@ -1,7 +1,7 @@
 const { src, dest } = require("gulp");
 
-const copy = ({ source, destination }) => {
-  return src(source).pipe(dest(destination));
+const copy = ({ source, destination, base }) => {
+  return src(source, { base }).pipe(dest(destination));
 };
 
 /** Passthrough assets */
@@ -10,7 +10,11 @@ module.exports = ({ paths }) => {
     const assets = Array.isArray(paths.assets) ? paths.assets : [paths.assets];
     return Promise.allSettled(
       assets.map((path) =>
-        copy({ source: path.source, destination: path.destination })
+        copy({
+          source: path.source,
+          destination: path.destination,
+          base: path.base,
+        })
       )
     );
   };
