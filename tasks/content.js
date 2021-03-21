@@ -1,4 +1,4 @@
-const { src, dest } = require("gulp");
+const gulp = require("gulp");
 const htmlmin = require("gulp-htmlmin");
 
 /**
@@ -7,8 +7,10 @@ const htmlmin = require("gulp-htmlmin");
  * - Minify
  */
 module.exports = ({ paths }) => {
+  const contentFiles = paths.content;
   const contentTask = () => {
-    return src(paths.content)
+    return gulp
+      .src(contentFiles)
       .pipe(
         htmlmin({
           collapseWhitespace: true,
@@ -17,8 +19,9 @@ module.exports = ({ paths }) => {
           minifyJS: true, // TODO: ES6 is not minified: https://github.com/samvloeberghs/kwerri-oss/pull/43
         })
       )
-      .pipe(dest(paths.destination));
+      .pipe(gulp.dest(paths.destination));
   };
   contentTask.displayName = "content";
+  contentTask.watcher = () => gulp.watch(contentFiles, contentTask);
   return contentTask;
 };

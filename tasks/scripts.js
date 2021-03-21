@@ -36,6 +36,5 @@ module.exports = ({ paths, useBabel = false }) => {
   };
   scriptsTask.displayName = "scripts";
   scriptsTask.watcher = () => gulp.watch(scriptFiles, scriptsTask);
-
   return scriptsTask;
 };
