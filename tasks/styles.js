@@ -14,9 +14,7 @@ const defaultPostcssPlugins = ["autoprefixer"];
  * - Concat all style files
  * - Compile SASS/SCSS to CSS
  * - Process PostCSS
- *   - Tailwind
  *   - Autoprefixer
- *   - Purge unused CSS
  * - Minify
  */
 module.exports = ({ paths, postcssPlugins }) => {
