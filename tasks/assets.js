@@ -1,7 +1,7 @@
-const { src, dest } = require("gulp");
+const gulp = require("gulp");
 
 const copy = ({ source, destination, base }) => {
-  return src(source, { base }).pipe(dest(destination));
+  return gulp.src(source, { base }).pipe(gulp.dest(destination));
 };
 
 /** Passthrough assets */
@@ -12,12 +12,21 @@ module.exports = ({ paths }) => {
       assets.map((path) =>
         copy({
           source: path.source,
-          destination: path.destination,
+          destination: path.destination || paths.destination,
           base: path.base,
         })
       )
     );
   };
   assetsTask.displayName = "assets";
+
+  const watchGlob = Array.isArray(paths.assets)
+    ? paths.assets.map((path) => path.watch || path.source)
+    : paths.assets.watch || paths.assets.source;
+
+  assetsTask.watcher = () => {
+    return gulp.watch(watchGlob, assetsTask);
+  };
+
   return assetsTask;
 };
