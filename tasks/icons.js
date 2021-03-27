@@ -33,7 +33,7 @@ module.exports = ({ paths, svgSpriteOptions = {} }) => {
     return Promise.allSettled(
       icons.map(({ source, destination, fileName }) =>
         gulp
-          .src(`${source}/**/*.svg`, {
+          .src(source, {
             since: gulp.lastRun(iconsTask),
           })
           .pipe(plumber())

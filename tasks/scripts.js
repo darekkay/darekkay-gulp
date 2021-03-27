@@ -14,10 +14,9 @@ const minify = require("gulp-minify");
  * - Minify
  */
 module.exports = ({ paths, useBabel = false }) => {
-  const scriptFiles = `${paths.scripts.source}/**/*.js`;
   const scriptsTask = () => {
     return gulp
-      .src([scriptFiles], {
+      .src([paths.scripts.source], {
         since: gulp.lastRun(scriptsTask),
       })
       .pipe(concat("index.js"))
@@ -35,6 +34,6 @@ module.exports = ({ paths, useBabel = false }) => {
       .pipe(gulp.dest(paths.scripts.destination));
   };
   scriptsTask.displayName = "scripts";
-  scriptsTask.watcher = () => gulp.watch(scriptFiles, scriptsTask);
+  scriptsTask.watcher = () => gulp.watch(paths.scripts.source, scriptsTask);
   return scriptsTask;
 };
