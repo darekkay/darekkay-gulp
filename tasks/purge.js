@@ -28,6 +28,13 @@ module.exports = ({ paths, purgeCssOptions = {} }) => {
               return broadMatches.concat(innerMatches);
             },
 
+            // TODO: https://github.com/tailwindlabs/tailwindcss/issues/3043
+            safelist: [
+              ":focus",
+              "::-moz-focus-inner",
+              "::-webkit-file-upload-button",
+            ],
+
             ...purgeCssOptions,
           }),
         ])

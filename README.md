@@ -6,12 +6,6 @@
 
 My shared gulp tasks.
 
-## Publish steps
-
-```
-$ npm publish --access public
-```
-
 ## License
 
 This project and its contents are open source under the [MIT license](LICENSE).
