@@ -6,7 +6,7 @@ const plumber = require("gulp-plumber");
 const concat = require("gulp-concat");
 const minify = require("gulp-clean-css");
 
-const { createWatcher } = require("./utils/");
+const { createWatcher, logFiles } = require("./utils/");
 
 const defaultPostcssPlugins = ["autoprefixer"];
 
@@ -19,7 +19,7 @@ const defaultPostcssPlugins = ["autoprefixer"];
  *   - Autoprefixer
  * - Minify
  */
-module.exports = ({ paths, postcssPlugins }) => {
+module.exports = ({ paths, postcssPlugins, debug }) => {
   const stylesTask = () => {
     const styles = Array.isArray(paths.styles) ? paths.styles : [paths.styles];
     return Promise.allSettled(
@@ -38,6 +38,7 @@ module.exports = ({ paths, postcssPlugins }) => {
             )
           )
           .pipe(minify())
+          .pipe(logFiles("[styles]", debug))
           .pipe(gulp.dest(destination))
       )
     );

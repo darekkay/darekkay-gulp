@@ -1,13 +1,16 @@
 const gulp = require("gulp");
 
-const { createWatcher } = require("./utils/");
+const { createWatcher, logFiles } = require("./utils/");
 
-const copy = ({ source, destination, base }) => {
-  return gulp.src(source, { base }).pipe(gulp.dest(destination));
+const copy = ({ source, destination, base, debug }) => {
+  return gulp
+    .src(source, { base })
+    .pipe(logFiles("[assets]", debug))
+    .pipe(gulp.dest(destination));
 };
 
 /** Passthrough assets */
-module.exports = ({ paths }) => {
+module.exports = ({ paths, debug }) => {
   const assetsTask = () => {
     const assets = Array.isArray(paths.assets) ? paths.assets : [paths.assets];
     return Promise.allSettled(
@@ -16,6 +19,7 @@ module.exports = ({ paths }) => {
           source: path.source,
           destination: path.destination || paths.destination,
           base: path.base,
+          debug,
         })
       )
     );

@@ -6,7 +6,7 @@ const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const minify = require("gulp-minify");
 
-const { createWatcher } = require("./utils/");
+const { createWatcher, logFiles } = require("./utils/");
 
 /**
  * Process all scripts:
@@ -15,7 +15,7 @@ const { createWatcher } = require("./utils/");
  * - Run Babel
  * - Minify
  */
-module.exports = ({ paths, useBabel = false }) => {
+module.exports = ({ paths, useBabel = false, debug }) => {
   const scriptsTask = () => {
     return gulp
       .src(paths.scripts.source, {
@@ -33,6 +33,7 @@ module.exports = ({ paths, useBabel = false }) => {
         )
       )
       .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
+      .pipe(logFiles("[scripts]", debug))
       .pipe(gulp.dest(paths.scripts.destination));
   };
   scriptsTask.displayName = "scripts";

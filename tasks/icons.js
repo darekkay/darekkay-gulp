@@ -3,7 +3,7 @@ const svgSprite = require("gulp-svg-sprite");
 const dependents = require("gulp-dependents");
 const plumber = require("gulp-plumber");
 
-const { createWatcher } = require("./utils/");
+const { createWatcher, logFiles } = require("./utils/");
 
 const defaultConfig = (fileName) => ({
   mode: {
@@ -29,7 +29,7 @@ const defaultConfig = (fileName) => ({
 /**
  * Combine all SVG icons into a single icon sprite.
  */
-module.exports = ({ paths, svgSpriteOptions = {} }) => {
+module.exports = ({ paths, svgSpriteOptions = {}, debug }) => {
   const iconsTask = () => {
     const icons = Array.isArray(paths.icons) ? paths.icons : [paths.icons];
     return Promise.allSettled(
@@ -39,6 +39,7 @@ module.exports = ({ paths, svgSpriteOptions = {} }) => {
           .pipe(plumber())
           .pipe(dependents())
           .pipe(svgSprite({ ...defaultConfig(fileName), ...svgSpriteOptions }))
+          .pipe(logFiles("[icons]", debug))
           .pipe(gulp.dest(destination))
       )
     );

@@ -5,8 +5,10 @@ const plumber = require("gulp-plumber");
 const minify = require("gulp-clean-css");
 const purgecss = require("@fullhuman/postcss-purgecss");
 
+const { logFiles } = require("./utils/");
+
 /** Purge unused CSS */
-module.exports = ({ paths, purgeCssOptions = {} }) => {
+module.exports = ({ paths, purgeCssOptions = {}, debug }) => {
   const purgeTask = () => {
     return gulp
       .src(paths.purge.css)
@@ -40,6 +42,7 @@ module.exports = ({ paths, purgeCssOptions = {} }) => {
         ])
       )
       .pipe(minify())
+      .pipe(logFiles("[purge]", debug))
       .pipe(gulp.dest(paths.purge.destination));
   };
   purgeTask.displayName = "purge";
