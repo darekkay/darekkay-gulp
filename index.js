@@ -18,6 +18,7 @@ const tasks = (config) => {
       if (task && task.watcher) task.watcher();
     });
   };
+  enabledTasks.watch.displayName = "watch";
   return enabledTasks;
 };
 
