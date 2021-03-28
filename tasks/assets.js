@@ -24,9 +24,7 @@ module.exports = ({ paths }) => {
     ? paths.assets.map((path) => path.watch || path.source)
     : paths.assets.watch || paths.assets.source;
 
-  assetsTask.watcher = () => {
-    return gulp.watch(watchGlob, assetsTask);
-  };
+  assetsTask.watcher = () => gulp.watch(watchGlob, assetsTask);
 
   return assetsTask;
 };

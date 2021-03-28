@@ -16,7 +16,7 @@ const minify = require("gulp-minify");
 module.exports = ({ paths, useBabel = false }) => {
   const scriptsTask = () => {
     return gulp
-      .src([paths.scripts.source], {
+      .src(paths.scripts.source, {
         since: gulp.lastRun(scriptsTask),
       })
       .pipe(concat("index.js"))

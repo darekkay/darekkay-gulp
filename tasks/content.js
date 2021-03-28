@@ -7,10 +7,9 @@ const htmlmin = require("gulp-htmlmin");
  * - Minify
  */
 module.exports = ({ paths }) => {
-  const contentFiles = paths.content;
   const contentTask = () => {
     return gulp
-      .src(contentFiles)
+      .src(paths.content)
       .pipe(
         htmlmin({
           collapseWhitespace: true,
@@ -22,6 +21,6 @@ module.exports = ({ paths }) => {
       .pipe(gulp.dest(paths.destination));
   };
   contentTask.displayName = "content";
-  contentTask.watcher = () => gulp.watch(contentFiles, contentTask);
+  contentTask.watcher = () => gulp.watch(paths.content, contentTask);
   return contentTask;
 };

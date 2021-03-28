@@ -33,9 +33,7 @@ module.exports = ({ paths, svgSpriteOptions = {} }) => {
     return Promise.allSettled(
       icons.map(({ source, destination, fileName }) =>
         gulp
-          .src(source, {
-            since: gulp.lastRun(iconsTask),
-          })
+          .src(source)
           .pipe(plumber())
           .pipe(dependents())
           .pipe(svgSprite({ ...defaultConfig(fileName), ...svgSpriteOptions }))
@@ -48,6 +46,7 @@ module.exports = ({ paths, svgSpriteOptions = {} }) => {
   const watchGlob = Array.isArray(paths.icons)
     ? paths.icons.map((path) => path.watch || path.source)
     : paths.icons.watch || paths.icons.source;
+
   iconsTask.watcher = () => gulp.watch(watchGlob, iconsTask);
 
   return iconsTask;

@@ -23,9 +23,7 @@ module.exports = ({ paths, postcssPlugins }) => {
     return Promise.allSettled(
       styles.map(({ source, destination, fileName }) =>
         gulp
-          .src([source], {
-            since: gulp.lastRun(stylesTask),
-          })
+          .src(source)
           .pipe(concat(fileName || "styles.css"))
           .pipe(plumber())
           .pipe(dependents())
@@ -47,8 +45,7 @@ module.exports = ({ paths, postcssPlugins }) => {
   const watchGlob = Array.isArray(paths.styles)
     ? paths.styles.map((path) => path.watch || path.source)
     : paths.styles.watch || paths.styles.source;
-  // TODO: fix watcher
-  // when using index.scss > component.scss, a change to component.scss will not retrigger the build for index.scss
+
   stylesTask.watcher = () => gulp.watch(watchGlob, stylesTask);
 
   return stylesTask;
