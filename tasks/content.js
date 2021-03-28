@@ -21,6 +21,8 @@ module.exports = ({ paths }) => {
       .pipe(gulp.dest(paths.destination));
   };
   contentTask.displayName = "content";
+
   contentTask.watcher = () => gulp.watch(paths.content, contentTask);
+
   return contentTask;
 };

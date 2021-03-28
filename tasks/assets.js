@@ -1,5 +1,7 @@
 const gulp = require("gulp");
 
+const { createWatcher } = require("./utils/");
+
 const copy = ({ source, destination, base }) => {
   return gulp.src(source, { base }).pipe(gulp.dest(destination));
 };
@@ -20,11 +22,7 @@ module.exports = ({ paths }) => {
   };
   assetsTask.displayName = "assets";
 
-  const watchGlob = Array.isArray(paths.assets)
-    ? paths.assets.map((path) => path.watch || path.source)
-    : paths.assets.watch || paths.assets.source;
-
-  assetsTask.watcher = () => gulp.watch(watchGlob, assetsTask);
+  assetsTask.watcher = createWatcher(paths.assets, assetsTask);
 
   return assetsTask;
 };

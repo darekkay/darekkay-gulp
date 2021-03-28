@@ -5,5 +5,6 @@ module.exports = () => (environment) => {
     return Promise.resolve();
   };
   task.displayName = "env";
+
   return task;
 };

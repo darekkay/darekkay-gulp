@@ -6,6 +6,8 @@ const concat = require("gulp-concat");
 const babel = require("gulp-babel");
 const minify = require("gulp-minify");
 
+const { createWatcher } = require("./utils/");
+
 /**
  * Process all scripts:
  *
@@ -34,6 +36,8 @@ module.exports = ({ paths, useBabel = false }) => {
       .pipe(gulp.dest(paths.scripts.destination));
   };
   scriptsTask.displayName = "scripts";
-  scriptsTask.watcher = () => gulp.watch(paths.scripts.source, scriptsTask);
+
+  scriptsTask.watcher = createWatcher(paths.scripts, scriptsTask);
+
   return scriptsTask;
 };

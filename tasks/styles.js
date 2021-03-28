@@ -6,6 +6,8 @@ const plumber = require("gulp-plumber");
 const concat = require("gulp-concat");
 const minify = require("gulp-clean-css");
 
+const { createWatcher } = require("./utils/");
+
 const defaultPostcssPlugins = ["autoprefixer"];
 
 /**
@@ -42,11 +44,7 @@ module.exports = ({ paths, postcssPlugins }) => {
   };
   stylesTask.displayName = "styles";
 
-  const watchGlob = Array.isArray(paths.styles)
-    ? paths.styles.map((path) => path.watch || path.source)
-    : paths.styles.watch || paths.styles.source;
-
-  stylesTask.watcher = () => gulp.watch(watchGlob, stylesTask);
+  stylesTask.watcher = createWatcher(paths.styles, stylesTask);
 
   return stylesTask;
 };

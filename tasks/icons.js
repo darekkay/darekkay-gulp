@@ -3,6 +3,8 @@ const svgSprite = require("gulp-svg-sprite");
 const dependents = require("gulp-dependents");
 const plumber = require("gulp-plumber");
 
+const { createWatcher } = require("./utils/");
+
 const defaultConfig = (fileName) => ({
   mode: {
     inline: true,
@@ -43,11 +45,7 @@ module.exports = ({ paths, svgSpriteOptions = {} }) => {
   };
   iconsTask.displayName = "icons";
 
-  const watchGlob = Array.isArray(paths.icons)
-    ? paths.icons.map((path) => path.watch || path.source)
-    : paths.icons.watch || paths.icons.source;
-
-  iconsTask.watcher = () => gulp.watch(watchGlob, iconsTask);
+  iconsTask.watcher = createWatcher(paths.icons, iconsTask);
 
   return iconsTask;
 };
