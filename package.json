@@ -8,8 +8,8 @@
     "email": "hello@darekkay.com"
   },
   "dependencies": {
-    "@babel/core": "7.13.13",
-    "@babel/preset-env": "7.13.12",
+    "@babel/core": "7.14.0",
+    "@babel/preset-env": "7.14.1",
     "@fullhuman/postcss-purgecss": "4.0.3",
     "@mr-hope/gulp-sass": "2.0.0",
     "autoprefixer": "10.2.5",
@@ -26,8 +26,8 @@
     "gulp-plumber": "1.2.1",
     "gulp-postcss": "9.0.0",
     "gulp-svg-sprite": "1.5.0",
-    "postcss": "8.2.8",
-    "tailwindcss": "2.0.4"
+    "postcss": "8.2.14",
+    "tailwindcss": "2.1.2"
   },
   "devDependencies": {
     "@darekkay/eslint-config": "2.4.0",
