@@ -27,7 +27,7 @@ module.exports = ({ paths, purgeCssOptions = {}, debug }) => {
               const innerMatches =
                 content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || [];
 
-              return broadMatches.concat(innerMatches);
+              return [...broadMatches, ...innerMatches];
             },
 
             // TODO: https://github.com/tailwindlabs/tailwindcss/issues/3043

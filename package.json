@@ -30,15 +30,8 @@
     "tailwindcss": "2.1.2"
   },
   "devDependencies": {
-    "@darekkay/eslint-config": "2.4.0",
-    "@types/gulp": "4.0.8",
-    "eslint": "7.17.0",
-    "eslint-plugin-import": "2.22.1",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-prettier": "3.3.1",
-    "eslint-plugin-unicorn": "26.0.1",
-    "npm-run-all": "4.1.5",
-    "prettier": "2.2.1"
+    "@darekkay/scripts": "1.3.1",
+    "@types/gulp": "4.0.8"
   },
   "engines": {
     "node": ">=12.9.0"
@@ -59,9 +52,8 @@
     "url": "https://github.com/darekkay/darekkay-gulp.git"
   },
   "scripts": {
-    "ci": "run-s lint",
-    "format": "prettier --write .",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "ci": "dks ci",
+    "format": "dks format",
+    "lint": "dks lint"
   }
 }
