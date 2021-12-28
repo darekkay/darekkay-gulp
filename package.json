@@ -33,7 +33,7 @@
     "@types/gulp": "4.0.9"
   },
   "engines": {
-    "node": ">=12.9.0"
+    "node": ">=12.22.0"
   },
   "files": [
     "tasks"
