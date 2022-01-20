@@ -17,24 +17,32 @@ const { createWatcher, logFiles } = require("./utils/");
  */
 module.exports = ({ paths, useBabel = false, debug }) => {
   const scriptsTask = () => {
-    return gulp
-      .src(paths.scripts.source, {
-        since: gulp.lastRun(scriptsTask),
-      })
-      .pipe(concat("index.js"))
-      .pipe(plumber())
-      .pipe(dependents())
-      .pipe(
-        gulpif(
-          useBabel,
-          babel({
-            presets: ["@babel/env"],
+    const scripts = Array.isArray(paths.scripts)
+      ? paths.scripts
+      : [paths.scripts];
+
+    return Promise.allSettled(
+      scripts.map(({ source, destination, fileName }) =>
+        gulp
+          .src(source, {
+            since: gulp.lastRun(scriptsTask),
           })
-        )
+          .pipe(concat(fileName || "index.js"))
+          .pipe(plumber())
+          .pipe(dependents())
+          .pipe(
+            gulpif(
+              useBabel,
+              babel({
+                presets: ["@babel/env"],
+              })
+            )
+          )
+          .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
+          .pipe(logFiles("[scripts]", debug))
+          .pipe(gulp.dest(destination))
       )
-      .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
-      .pipe(logFiles("[scripts]", debug))
-      .pipe(gulp.dest(paths.scripts.destination));
+    );
   };
   scriptsTask.displayName = "scripts";
 
