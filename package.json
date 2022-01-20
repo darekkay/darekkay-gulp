@@ -1,7 +1,7 @@
 {
   "name": "@darekkay/gulp",
   "description": "My shared gulp tasks",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "author": "Darek Kay <hello@darekkay.com> (https://darekkay.com/)",
   "bugs": {
     "url": "https://github.com/darekkay/darekkay-gulp/issues",
