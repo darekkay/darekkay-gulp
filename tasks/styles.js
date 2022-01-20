@@ -1,5 +1,5 @@
 const gulp = require("gulp");
-const { sassSync } = require("@mr-hope/gulp-sass");
+const { sass } = require("@mr-hope/gulp-sass");
 const dependents = require("gulp-dependents");
 const postcss = require("gulp-postcss");
 const plumber = require("gulp-plumber");
@@ -29,7 +29,7 @@ module.exports = ({ paths, postcssPlugins, debug }) => {
           .pipe(concat(fileName || "styles.css"))
           .pipe(plumber())
           .pipe(dependents())
-          .pipe(sassSync().on("error", sassSync.logError))
+          .pipe(sass().on("error", sass.logError))
           .pipe(
             postcss(
               (postcssPlugins || defaultPostcssPlugins).map((plugin) =>
