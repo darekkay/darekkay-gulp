@@ -30,9 +30,14 @@ module.exports = ({ paths, purgeCssOptions = {}, debug }) => {
               return [...broadMatches, ...innerMatches];
             },
 
-            // TODO: https://github.com/tailwindlabs/tailwindcss/issues/3043
             safelist: [
+              // theme picker
+              "data-theme",
+              "data-theme-icon",
+
+              // https://github.com/tailwindlabs/tailwindcss/issues/3043
               ":focus",
+              ":focus-visible",
               "::-moz-focus-inner",
               "::-webkit-file-upload-button",
             ],
