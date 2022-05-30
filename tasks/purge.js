@@ -47,7 +47,7 @@ module.exports = ({ paths, purgeCssOptions = {}, debug }) => {
         ])
       )
       .pipe(minify())
-      .pipe(logFiles("[purge]", debug))
+      .pipe(logFiles("[purge]", paths.purge.debug ?? debug))
       .pipe(gulp.dest(paths.purge.destination));
   };
   purgeTask.displayName = "purge";

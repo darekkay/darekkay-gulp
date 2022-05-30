@@ -22,7 +22,7 @@ module.exports = ({ paths, useBabel = false, debug }) => {
       : [paths.scripts];
 
     return Promise.allSettled(
-      scripts.map(({ source, destination, fileName }) =>
+      scripts.map(({ source, destination, fileName, debug: scriptsDebug }) =>
         gulp
           .src(source, {
             since: gulp.lastRun(scriptsTask),
@@ -39,7 +39,7 @@ module.exports = ({ paths, useBabel = false, debug }) => {
             )
           )
           .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
-          .pipe(logFiles("[scripts]", debug))
+          .pipe(logFiles("[scripts]", scriptsDebug ?? debug))
           .pipe(gulp.dest(destination))
       )
     );

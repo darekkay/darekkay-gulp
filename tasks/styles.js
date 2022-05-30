@@ -23,7 +23,7 @@ module.exports = ({ paths, postcssPlugins, debug }) => {
   const stylesTask = () => {
     const styles = Array.isArray(paths.styles) ? paths.styles : [paths.styles];
     return Promise.allSettled(
-      styles.map(({ source, destination, fileName }) =>
+      styles.map(({ source, destination, fileName, debug: stylesDebug }) =>
         gulp
           .src(source)
           .pipe(concat(fileName || "styles.css"))
@@ -38,7 +38,7 @@ module.exports = ({ paths, postcssPlugins, debug }) => {
             )
           )
           .pipe(minify())
-          .pipe(logFiles("[styles]", debug))
+          .pipe(logFiles("[styles]", stylesDebug ?? debug))
           .pipe(gulp.dest(destination))
       )
     );

@@ -19,7 +19,7 @@ module.exports = ({ paths, debug }) => {
           source: path.source,
           destination: path.destination || paths.destination,
           base: path.base,
-          debug,
+          debug: path.debug ?? debug,
         })
       )
     );

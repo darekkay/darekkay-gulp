@@ -33,13 +33,13 @@ module.exports = ({ paths, svgSpriteOptions = {}, debug }) => {
   const iconsTask = () => {
     const icons = Array.isArray(paths.icons) ? paths.icons : [paths.icons];
     return Promise.allSettled(
-      icons.map(({ source, destination, fileName }) =>
+      icons.map(({ source, destination, fileName, debug: iconsDebug }) =>
         gulp
           .src(source)
           .pipe(plumber())
           .pipe(dependents())
           .pipe(svgSprite({ ...defaultConfig(fileName), ...svgSpriteOptions }))
-          .pipe(logFiles("[icons]", debug))
+          .pipe(logFiles("[icons]", iconsDebug ?? debug))
           .pipe(gulp.dest(destination))
       )
     );
