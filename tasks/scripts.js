@@ -24,9 +24,7 @@ module.exports = ({ paths, useBabel = false, debug }) => {
     return Promise.allSettled(
       scripts.map(({ source, destination, fileName, debug: scriptsDebug }) =>
         gulp
-          .src(source, {
-            since: gulp.lastRun(scriptsTask),
-          })
+          .src(source)
           .pipe(concat(fileName || "index.js"))
           .pipe(plumber())
           .pipe(dependents())
