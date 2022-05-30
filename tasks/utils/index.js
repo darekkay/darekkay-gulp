@@ -3,7 +3,7 @@ const gulpDebug = require("gulp-debug");
 
 const createWatcher = (config, task) => {
   const watchGlob = Array.isArray(config)
-    ? config.map((item) => item.watch || item.source)
+    ? config.flatMap((item) => item.watch || item.source)
     : config.watch || config.source;
 
   return () => gulp.watch(watchGlob, task);
