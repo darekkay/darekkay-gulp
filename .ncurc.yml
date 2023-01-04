@@ -4,3 +4,5 @@ reject:
   # pinned to 2 as long as jit is not used
   - "tailwindcss"
 
+  # ESM
+  - "del"
