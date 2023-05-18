@@ -30,7 +30,7 @@
     "tailwindcss": "2.2.19"
   },
   "devDependencies": {
-    "@darekkay/scripts": "2.6.0",
+    "@darekkay/scripts": "2.6.1",
     "@types/gulp": "4.0.10"
   },
   "engines": {
