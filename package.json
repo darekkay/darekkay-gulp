@@ -8,11 +8,11 @@
     "email": "hello@darekkay.com"
   },
   "dependencies": {
-    "@babel/core": "7.21.8",
-    "@babel/preset-env": "7.21.5",
+    "@babel/core": "7.23.6",
+    "@babel/preset-env": "7.23.6",
     "@fullhuman/postcss-purgecss": "5.0.0",
     "@mr-hope/gulp-sass": "3.1.1",
-    "autoprefixer": "10.4.14",
+    "autoprefixer": "10.4.16",
     "del": "6.0.0",
     "gulp": "4.0.2",
     "gulp-babel": "8.0.0",
@@ -26,12 +26,12 @@
     "gulp-plumber": "1.2.1",
     "gulp-postcss": "9.0.1",
     "gulp-svg-sprite": "2.0.3",
-    "postcss": "8.4.23",
+    "postcss": "8.4.32",
     "tailwindcss": "2.2.19"
   },
   "devDependencies": {
     "@darekkay/scripts": "3.0.0",
-    "@types/gulp": "4.0.10"
+    "@types/gulp": "4.0.17"
   },
   "engines": {
     "node": ">=18.0.0"

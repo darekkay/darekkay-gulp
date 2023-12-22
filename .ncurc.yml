@@ -6,3 +6,4 @@ reject:
 
   # ESM
   - "del"
+  - "gulp-debug"
