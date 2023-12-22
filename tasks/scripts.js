@@ -33,13 +33,13 @@ module.exports = ({ paths, useBabel = false, debug }) => {
               useBabel,
               babel({
                 presets: ["@babel/env"],
-              })
-            )
+              }),
+            ),
           )
           .pipe(minify({ ext: { min: ".min.js" }, noSource: true }))
           .pipe(logFiles("[scripts]", scriptsDebug ?? debug))
-          .pipe(gulp.dest(destination))
-      )
+          .pipe(gulp.dest(destination)),
+      ),
     );
   };
   scriptsTask.displayName = "scripts";

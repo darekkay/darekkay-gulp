@@ -44,7 +44,7 @@ module.exports = ({ paths, purgeCssOptions = {}, debug }) => {
 
             ...purgeCssOptions,
           }),
-        ])
+        ]),
       )
       .pipe(minify())
       .pipe(logFiles("[purge]", paths.purge.debug ?? debug))

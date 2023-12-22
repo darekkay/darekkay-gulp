@@ -40,8 +40,8 @@ module.exports = ({ paths, svgSpriteOptions = {}, debug }) => {
           .pipe(dependents())
           .pipe(svgSprite({ ...defaultConfig(fileName), ...svgSpriteOptions }))
           .pipe(logFiles("[icons]", iconsDebug ?? debug))
-          .pipe(gulp.dest(destination))
-      )
+          .pipe(gulp.dest(destination)),
+      ),
     );
   };
   iconsTask.displayName = "icons";

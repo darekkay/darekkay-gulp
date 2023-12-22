@@ -33,14 +33,14 @@ module.exports = ({ paths, postcssPlugins, debug }) => {
           .pipe(
             postcss(
               (postcssPlugins || defaultPostcssPlugins).map((plugin) =>
-                require(plugin)
-              )
-            )
+                require(plugin),
+              ),
+            ),
           )
           .pipe(minify())
           .pipe(logFiles("[styles]", stylesDebug ?? debug))
-          .pipe(gulp.dest(destination))
-      )
+          .pipe(gulp.dest(destination)),
+      ),
     );
   };
   stylesTask.displayName = "styles";

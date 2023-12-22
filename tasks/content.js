@@ -18,7 +18,7 @@ module.exports = ({ paths, debug }) => {
           removeComments: true,
           minifyCSS: true,
           minifyJS: true, // TODO: ES6 is not minified: https://github.com/samvloeberghs/kwerri-oss/pull/43
-        })
+        }),
       )
       .pipe(logFiles("[content]", debug))
       .pipe(gulp.dest(paths.destination));

@@ -20,8 +20,8 @@ module.exports = ({ paths, debug }) => {
           destination: path.destination || paths.destination,
           base: path.base,
           debug: path.debug ?? debug,
-        })
-      )
+        }),
+      ),
     );
   };
   assetsTask.displayName = "assets";
